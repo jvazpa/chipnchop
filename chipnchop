@@ -1,0 +1,118 @@
+#! /bin/bash
+
+echo ""
+echo "-. .-.   .-. .-.   .-. .-.   ."
+echo "||\|||\ /|||\|||\ /|||\|||\ /|"
+echo "|/ \|||\|||/ \|||\|||/ \|||\||"
+echo "~   ·-~ ·-·   ·-~ ·-·   -~  ·~"
+
+
+
+echo ""
+echo -e "\033[1mChipNChop\033[0m is a straight-forward bash script that performs ChIP-seq data analysis. For this purpose, it takes an TXT dataset including parameters detailed in the README document."
+echo ""
+
+## The next message will appear if no imputs are given.
+
+if [ $# -ne 1 ]
+then
+        echo "Usage: bash chipnchop.sh <params>"
+        echo ""
+        echo "params: Input file including the parameters"
+        exit
+fi
+
+## In any other case, the script will print the experiment name and number of
+## samples specified in the parameters file.
+
+
+echo ""
+echo "============================"
+echo "|    Reading parameters    |"
+echo "============================"
+echo ""
+
+PARAMS=$1
+
+WD=$(grep working_directory: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mWorking directory\e[0m: $WD"
+
+EXP=$(grep experiment_name $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mExperiment name\e[0m: $EXP"
+
+## NSAM=$(grep number_samples: $PARAMS | awk '{ print $2 }')
+## echo -e "\e[4mNumber of samples\e[0m: $NSAM"
+
+GEND=$(grep genome_directory: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mGenome directory\e[0m: $GEND"
+
+ANND=$(grep annotation_directory: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mAnnotation directory\e[0m: $ANND"
+
+
+## INSDIR=$(grep installation_directory: $PARAMS | awk '{ print $2 }')
+## echo -e "\e[4mInstallation directory\e[0m: $INSDIR"
+
+## DESIGN=$(grep experimental_design: $PARAMS | awk '{ print $2 }')
+## echo -e "\e[4mExperimental design directory\e[0m: $DESIGN"
+
+CHIP=$(grep path_chip: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mChip sample directory\e[0m = ${CHIP}"
+
+INPUT=$(grep path_input: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mInput sample directory\e[0m = ${INPUT}"
+
+## Once these parameters have been read, workspace is set:
+
+echo ""
+echo "============================"
+echo "|    Creating workspace    |"
+echo "============================"
+echo ""
+
+cd $WD
+mkdir $EXP
+cd $EXP
+mkdir genome annotation samples results
+
+cd genome
+cp $GEND genome.fa
+
+cd ../annotation
+cp $ANND annotation.gtf
+
+
+## Copying sample data to their corresponding sample file
+
+cd ../samples
+mkdir chip input
+
+cd chip
+cp ${CHIP} chip.fq.gz
+
+cd ../input
+cp ${INPUT} input.fq.gz
+
+echo ""
+echo "============================="
+echo "|   Reads quality control   |"
+echo "============================="
+echo ""
+
+cd $WD/$EXP/samples/chip
+fastqc -o chip_qc chip.fq.gz
+
+
+cd $WD/$EXP/samples/input
+fastqc -o input_qc input.fq.gz
+
+
+
+
+
+echo ""
+echo "============================"
+echo "|     Sample analysis      |"
+echo "============================"
+echo ""
+echo "Individual samples are being processed."
