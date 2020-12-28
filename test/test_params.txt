@@ -1,9 +1,6 @@
-installation_directory: /home/joatamazp/github_repositories/ARNeatSequences
 working_directory: /home/joatamazp/tmp/
 experiment_name: prr5
-number_samples: 2
-genome_directory: /home/joatamazp/rnaseqdata/chr5.fa
-annotation_directory: /home/joatamazp/rnaseqdata/chr5.gtf
-path_sample_1: /home/joatamazp/rnaseqdata/col0_7dag_chr5_1.fastq.gz
-path_sample_2: /home/joatamazp/rnaseqdata/col0_7dag_chr5_2.fastq.gz
-experimental_design: /home/joatamazp/rnaseqdata/experimental_design.csv
+genome_directory: /home/joatamazp/chipseqdata/chromosome1.fa
+annotation_directory: /home/joatamazp/chipseqdata/chromosome1.gtf
+path_chip: /home/joatamazp/chipseqdata/chip_prr5_chr1.fq.gz
+path_input: /home/joatamazp/chipseqdata/input_prr5_chr1.fq.gz

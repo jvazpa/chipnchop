@@ -93,6 +93,8 @@ cp ${CHIP} chip.fq.gz
 cd ../input
 cp ${INPUT} input.fq.gz
 
+echo "Workspace succesfully created"
+
 echo ""
 echo "============================="
 echo "|   Reads quality control   |"
@@ -100,19 +102,48 @@ echo "============================="
 echo ""
 
 cd $WD/$EXP/samples/chip
-fastqc -o chip_qc chip.fq.gz
-
+fastqc chip.fq.gz
 
 cd $WD/$EXP/samples/input
-fastqc -o input_qc input.fq.gz
-
-
-
-
+fastqc input.fq.gz
 
 echo ""
 echo "============================"
-echo "|     Sample analysis      |"
+echo "|      Mapping reads       |"
 echo "============================"
 echo ""
-echo "Individual samples are being processed."
+echo "Indexing the genome. This may take a while..."
+echo ""
+
+cd $WD/$EXP/genome
+bowtie2-build $GEND index
+
+echo ""
+echo "Mapping reads to the reference genome."
+echo ""
+
+cd ../samples/chip
+bowtie2 -x ../../genome/index -U $CHIP -S chip.sam
+
+samtools sort -o chip.bam chip.sam
+samtools index chip.bam
+
+rm -r *.sam
+
+cd ../input
+bowtie2 -x ../../genome/index -U $INPUT -S input.sam
+
+samtools sort -o input.bam input.sam
+samtools index input.bam
+
+rm -r *.sam
+
+echo ""
+echo "============================"
+echo "|      Peaks calling       |"
+echo "============================"
+echo ""
+
+cd $WD/$EXP/results
+
+macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n prr5
