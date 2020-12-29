@@ -146,12 +146,15 @@ echo ""
 
 cd $WD/$EXP/results
 
-macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n prr5
+macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP
 
 ## R script is moved from installation directory to results
 
 cp $INSDIR/target_genes.R .
 
-## R script is run
+## R script is running!
 
-Rscript target_genes.R
+Rscript target_genes.R $WD/$EXP/results/ $EXP
+
+
+
