@@ -50,8 +50,8 @@ ANND=$(grep annotation_directory: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mAnnotation directory\e[0m: $ANND"
 
 
-## INSDIR=$(grep installation_directory: $PARAMS | awk '{ print $2 }')
-## echo -e "\e[4mInstallation directory\e[0m: $INSDIR"
+INSDIR=$(grep installation_directory: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mInstallation directory\e[0m: $INSDIR"
 
 ## DESIGN=$(grep experimental_design: $PARAMS | awk '{ print $2 }')
 ## echo -e "\e[4mExperimental design directory\e[0m: $DESIGN"
@@ -147,3 +147,11 @@ echo ""
 cd $WD/$EXP/results
 
 macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n prr5
+
+## R script is moved from installation directory to results
+
+cp $INSDIR/target_genes.R .
+
+## R script is run
+
+Rscript target_genes.R
