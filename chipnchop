@@ -62,7 +62,7 @@ echo -e "\e[4mChip sample directory\e[0m = ${CHIP}"
 INPUT=$(grep path_input: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mInput sample directory\e[0m = ${INPUT}"
 
-##Â Once these parameters have been read, workspace is set:
+## Once these parameters have been read, workspace is set:
 
 echo ""
 echo "============================"
@@ -148,7 +148,7 @@ cd $WD/$EXP/results
 
 macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP
 
-##Â R script is moved from installation directory to results
+## R script is moved from installation directory to results
 
 cp $INSDIR/target_genes.R .
 
@@ -156,5 +156,17 @@ cp $INSDIR/target_genes.R .
 
 Rscript target_genes.R $WD/$EXP/results/ $EXP
 
+
+echo ""
+echo "============================="
+echo "|      Finding motifs       |"
+echo "============================="
+echo ""
+
+## Creating output directory
+
+mkdir output_homer
+
+findMotifsGenome.pl ${EXP}_summits.bed tair10 output_homer -len 8 -size 200
 
 
