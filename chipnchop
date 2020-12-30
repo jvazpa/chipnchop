@@ -4,21 +4,31 @@ echo ""
 echo "-. .-.   .-. .-.   .-. .-.   ."
 echo "||\|||\ /|||\|||\ /|||\|||\ /|"
 echo "|/ \|||\|||/ \|||\|||/ \|||\||"
-echo "~   Â·-~ Â·-Â·   Â·-~ Â·-Â·   -~  Â·~"
+echo "~   ·-~ ·-·   ·-~ ·-·   -~  ·~"
 
 
 
 echo ""
-echo -e "\033[1mChipNChop\033[0m is a straight-forward bash script that performs ChIP-seq data analysis. For this purpose, it takes an TXT dataset including parameters detailed in the README document."
+echo -e "\033[1mChipNChop\033[0m is a straight-forward bash script that performs ChIP-seq data analysis for Arabidopsis thaliana. For this purpose, it takes an TXT dataset including parameters detailed in the README document."
 echo ""
 
 ## The next message will appear if no imputs are given.
 
-if [ $# -ne 1 ]
+if [ $# -lt 1 -o $# -gt 2 ]
 then
-        echo "Usage: bash chipnchop.sh <params>"
+        echo "Usage: bash chipnchop.sh <params> [options]"
         echo ""
-        echo "params: Input file including the parameters"
+        echo "params		Input file including the parameters. Check documentation"
+        echo "		in order to create an acceptable parameters file."
+        echo ""
+        echo "options"
+        echo "-TF		This option must be specified if the analyzed proteins"
+        echo "		are transcription factors or interact in a similar way."
+        echo "		If not specified, this option is DEFAULT."
+        echo "-HI		This option must be specified if the analyzed proteins"
+        echo "		are	histones or other specific epigenetics marks that"
+        echo " 		affect large portions of DNA, in contrast to transcription factors."
+        
         exit
 fi
 
@@ -40,27 +50,45 @@ echo -e "\e[4mWorking directory\e[0m: $WD"
 EXP=$(grep experiment_name $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mExperiment name\e[0m: $EXP"
 
-## NSAM=$(grep number_samples: $PARAMS | awk '{ print $2 }')
-## echo -e "\e[4mNumber of samples\e[0m: $NSAM"
-
 GEND=$(grep genome_directory: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mGenome directory\e[0m: $GEND"
 
 ANND=$(grep annotation_directory: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mAnnotation directory\e[0m: $ANND"
 
-
 INSDIR=$(grep installation_directory: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mInstallation directory\e[0m: $INSDIR"
-
-## DESIGN=$(grep experimental_design: $PARAMS | awk '{ print $2 }')
-## echo -e "\e[4mExperimental design directory\e[0m: $DESIGN"
 
 CHIP=$(grep path_chip: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mChip sample directory\e[0m = ${CHIP}"
 
 INPUT=$(grep path_input: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mInput sample directory\e[0m = ${INPUT}"
+
+MODE=$2
+
+if [ $# -eq 1 ]; then
+MODE=-TF
+fi
+
+if [[ $MODE != -TF && $MODE != -HI ]]; then
+echo ""
+echo -e "Invalid protein type. Write -TF or -HI as the second parameter you introduce."
+echo ""
+exit
+fi
+
+if [[ $MODE == -TF ]]; then
+echo ""
+echo -e "\e[4mProtein type\e[0m = Transcription factor (-TF)"
+echo ""
+fi
+
+if [[ $MODE == -HI ]]; then
+echo ""
+echo -e "\e[4mProtein type\e[0m = Histone/epigenetic mark (-HI)"
+echo ""
+fi
 
 ## Once these parameters have been read, workspace is set:
 
@@ -146,7 +174,18 @@ echo ""
 
 cd $WD/$EXP/results
 
+if [[ $MODE == -TF ]]; then
+
 macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP
+
+fi
+
+if [[ $MODE == -HI ]]; then
+
+macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP --broad
+
+fi
+
 
 ## R script is moved from installation directory to results
 
@@ -154,7 +193,17 @@ cp $INSDIR/target_genes.R .
 
 ## R script is running!
 
-Rscript target_genes.R $WD/$EXP/results/ $EXP
+if [[ $MODE == -TF ]]; then
+
+Rscript target_genes_tf.R $WD/$EXP/results/ $EXP
+
+fi
+
+if [[ $MODE == -HI ]]; then
+
+Rscript target_genes_hi.R $WD/$EXP/results/ $EXP
+
+fi
 
 
 echo ""
@@ -169,4 +218,4 @@ mkdir output_homer
 
 findMotifsGenome.pl ${EXP}_summits.bed tair10 output_homer -len 8 -size 200
 
-
+echo "Analysis is done!"
