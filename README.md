@@ -1,5 +1,4 @@
 # ChIPnCHOP 
-(Chromatin ImmunoPrecipitation and Comprehensive Histone and Others interaction Pipeline)
 
 ![header_chipnchop](https://github.com/jvazpa/chipnchop/blob/main/format/header.png)
 
