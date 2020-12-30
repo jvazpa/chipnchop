@@ -174,12 +174,9 @@ echo ""
 
 cd $WD/$EXP/results
 
-macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP
-
-
 if [[ $MODE == -TF ]]; then
 
-macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP --narrow
+macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP
 
 fi
 
@@ -196,7 +193,17 @@ cp $INSDIR/target_genes.R .
 
 ## R script is running!
 
-Rscript target_genes.R $WD/$EXP/results/ $EXP
+if [[ $MODE == -TF ]]; then
+
+Rscript target_genes_tf.R $WD/$EXP/results/ $EXP
+
+fi
+
+if [[ $MODE == -HI ]]; then
+
+Rscript target_genes_hi.R $WD/$EXP/results/ $EXP
+
+fi
 
 
 echo ""
