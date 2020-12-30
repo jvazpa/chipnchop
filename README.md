@@ -1,7 +1,7 @@
 # ChIPnCHOP 
 (Chromatin ImmunoPrecipitation and Comprehensive Histone and Others interaction Pipeline)
 
-![header_chipnchop](https://github.com/jvazpac/chipnchop/format/image1.png)
+![header_chipnchop](https://github.com/jvazpac/chipnchop/format/header.png)
 
 A Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription factors and other proteins that interact with DNA developed by Biochemistry Degree students at the University of Seville.
 
