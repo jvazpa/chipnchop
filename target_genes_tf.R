@@ -133,8 +133,3 @@ cnetplot(x = edox, colorEdge = TRUE)
 print("==========================", quote = F)
 print("| R script has finished! |", quote = F)
 print("==========================", quote = F)
-
-## Análisis de las palabras reconocidas por el factor
-## de transcripción mediante HOMER
-## (http://homer.ucsd.edu/homer/ngs/peakMotifs.html)
-
