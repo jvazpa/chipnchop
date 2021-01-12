@@ -1,6 +1,7 @@
-working_directory: /home/joatamazp/tmp/
+working_directory: /home/josvazpac/tmp/
 experiment_name: prr5
-genome_directory: /home/joatamazp/chipseqdata/chromosome1.fa
-annotation_directory: /home/joatamazp/chipseqdata/chromosome1.gtf
-path_chip: /home/joatamazp/chipseqdata/chip_prr5_chr1.fq.gz
-path_input: /home/joatamazp/chipseqdata/input_prr5_chr1.fq.gz
+genome_directory: /home/josvazpac/prr5/genome/chromosome1.fa
+annotation_directory: /home/josvazpac/prr5/annotation/chromosome1.gtf
+path_chip: /home/josvazpac/prr5/samples/chip/chip_prr5_chr1.fq.gz
+path_input: /home/josvazpac/prr5/samples/input//input_prr5_chr1.fq.gz
+installation_directory: /home/josvazpac/chipnchop
