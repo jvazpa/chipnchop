@@ -93,36 +93,13 @@ echo -e "$TOTNUM samples have been given as an input."
 
 MODE=$2
 
-
-i=1
-CHIP=()
-while [ $i -le $CHIPNUM ]
-do
-        CHIP[$i]=$(grep chip_sample_$i: $PARAMS | awk '{ print $2 }')
-        ((i++))
-done
-
-echo -e "\e[4mCHIP samples directory\e[0m = ${CHIP[@]}"
-
-
-i=1
-INPUT=()
-while [ $i -le $INPNUM ]
-do
-        INPUT[$i]=$(grep input_sample_$i: $PARAMS | awk '{ print $2 }')
-        ((i++))
-done
-
-echo -e "\e[4mINPUT samples directory\e[0m = ${INPUT[@]}"
-
-
-## Once these parameters have been read, workspace is set:
-
 echo ""
 echo "============================"
 echo "|    Creating workspace    |"
 echo "============================"
 echo ""
+
+## Once these parameters have been read, workspace is set:
 
 cd $WD
 mkdir $EXP
@@ -135,30 +112,42 @@ cp $GEND genome.fa
 cd ../annotation
 cp $ANND annotation.gtf
 
-
-## Copying sample data to their corresponding sample file
-
 cd ../samples
 mkdir chip input
+
+
+## Copying chip samples
 
 cd chip
 
 i=1
+CHIP=()
 while [ $i -le $CHIPNUM ]
 do
-	cp CHIP[$i] chip_$i.fq.gz
-	((i++))
+        CHIP[$i]=$(grep chip_sample_$i: $PARAMS | awk '{ print $2 }')
+        cp CHIP[$i] chip_$i.fq.gz
+        ((i++))
 done
+
+echo -e "\e[4mCHIP samples directory\e[0m = ${CHIP[@]}"
+
+
+## Copying input samples
 
 cd ../input
 
 i=1
+INPUT=()
 while [ $i -le $INPNUM ]
 do
-	cp INPUT[$i] input_$i.fq.gz 
-    ((i++))
+        INPUT[$i]=$(grep input_sample_$i: $PARAMS | awk '{ print $2 }')
+        cp INPUT[$i] input_$i.fq.gz
+        ((i++))
 done
 
+echo -e "\e[4mINPUT samples directory\e[0m = ${INPUT[@]}"
+
+echo ""
 echo "Workspace succesfully created"
 
 
