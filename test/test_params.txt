@@ -2,6 +2,8 @@ working_directory: /home/anagontor1/tmp/
 experiment_name: prr5
 genome_directory: /home/anagontor1/prr5/genome/chromosome1.fa
 annotation_directory: /home/anagontor1/prr5/annotation/chromosome1.gtf
-path_chip: /home/anagontor1/prr5/samples/chip/chip_prr5_chr1.fq.gz
-path_input: /home/anagontor1/prr5/samples/input/input_prr5_chr1.fq.gz
+chip_sample_number: 1
+input_sample_number: 1
+chip_sample_1: /home/anagontor1/prr5/samples/chip/chip_prr5_chr1.fq.gz
+input_sample_1: /home/anagontor1/prr5/samples/input/input_prr5_chr1.fq.gz
 installation_directory: /home/anagontor1/chipnchop/
