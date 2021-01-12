@@ -109,7 +109,7 @@ j=1
 INPUT=()
 while [ $i -le $INPNUM ]
 do
-        CHIP[$i]=$(grep input_sample_$j: $PARAMS | awk '{ print $2 }')
+        INPUT[$i]=$(grep input_sample_$j: $PARAMS | awk '{ print $2 }')
         ((j++))
         ((i++))
 done
@@ -145,10 +145,24 @@ cd ../samples
 mkdir chip input
 
 cd chip
-cp ${CHIP} chip.fq.gz
+
+i=0
+j=1
+while [ $i -le $CHIPNUM ]
+do
+	cp CHIP[$i] chip_$i.fq.gz
+	i=$i+1
+done
 
 cd ../input
-cp ${INPUT} input.fq.gz
+
+i=0
+j=1
+while [ $i -le $INPNUM ]
+do
+        cp INPUT[$i] input_$i.fq.gz 
+        i=$i+1
+done
 
 echo "Workspace succesfully created"
 
@@ -179,13 +193,13 @@ cd $WD/$EXP/samples/chip
 
 i=0
 j=1
-while [ $i in $CHIPSUM ]
+while [ $i in $CHIPNUM ]
 do
 
 	## Debe hacer fastqc y mapearlo al genoma de referencia
 	
-	qsub sample_processing.sh 
-
+	qsub sample_processing.sh {} $j
+        j=$j+1
 done
 
 

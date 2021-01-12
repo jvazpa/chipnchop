@@ -1,19 +1,9 @@
-<<<<<<< HEAD
 working_directory: /home/josvazpac/tmp/
 experiment_name: prr5
 genome_directory: /home/josvazpac/prr5/genome/chromosome1.fa
 annotation_directory: /home/josvazpac/prr5/annotation/chromosome1.gtf
-path_chip: /home/josvazpac/prr5/samples/chip/chip_prr5_chr1.fq.gz
-path_input: /home/josvazpac/prr5/samples/input//input_prr5_chr1.fq.gz
-installation_directory: /home/josvazpac/chipnchop
-=======
-working_directory: /home/anagontor1/tmp/
-experiment_name: prr5
-genome_directory: /home/anagontor1/prr5/genome/chromosome1.fa
-annotation_directory: /home/anagontor1/prr5/annotation/chromosome1.gtf
 chip_sample_number: 1
-input_sample_number: 1
-chip_sample_1: /home/anagontor1/prr5/samples/chip/chip_prr5_chr1.fq.gz
-input_sample_1: /home/anagontor1/prr5/samples/input/input_prr5_chr1.fq.gz
-installation_directory: /home/anagontor1/chipnchop/
->>>>>>> 61711ab051c774e46dff7b17b7d78e5c0e2081d9
+inpt_sample_number: 1
+chip_sample_1: /home/josvazpac/prr5/samples/chip/chip_prr5_chr1.fq.gz
+input_sample_1: /home/josvazpac/prr5/samples/input/input_prr5_chr1.fq.gz
+installation_directory: /home/josvazpac/chipnchop/
