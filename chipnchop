@@ -16,10 +16,11 @@ echo ""
 
 if [ $# -lt 1 -o $# -gt 2 ]
 then
-        echo "Usage: bash chipnchop.sh <params> [options]"
+        echo "Usage: bash chipnchop.sh <FULL/PATH/to/params> [options]"
         echo ""
         echo "params		Input file including the parameters. Check documentation"
-        echo "		in order to create an acceptable parameters file."
+        echo "		in order to create an acceptable parameters file. IT MUST"
+	echo "		CLARIFY THE COMPLETE DIRECTORY TO PARAMS FILE."
         echo ""
         echo "options"
         echo "-TF		This option must be specified if the analyzed proteins"
@@ -112,7 +113,7 @@ cp $GEND genome.fa
 cd ../annotation
 cp $ANND annotation.gtf
 
-cd ../samples
+cd $WD/$EXP/samples
 mkdir chip input
 
 
@@ -124,12 +125,12 @@ i=1
 CHIP=()
 while [ $i -le $CHIPNUM ]
 do
-        CHIP[$i]=$(grep chip_sample_$i: $PARAMS | awk '{ print $2 }')
-        cp CHIP[$i] chip_$i.fq.gz
+	CHIP[$i]=$(grep chip_sample_$i: $PARAMS | awk '{ print $2 }')
+        cp ${CHIP[$i]} chip_$i.fq.gz
         ((i++))
+	echo -e "\e[4mCHIP samples directory\e[0m = ${CHIP[@]}"
 done
 
-echo -e "\e[4mCHIP samples directory\e[0m = ${CHIP[@]}"
 
 
 ## Copying input samples
@@ -141,11 +142,12 @@ INPUT=()
 while [ $i -le $INPNUM ]
 do
         INPUT[$i]=$(grep input_sample_$i: $PARAMS | awk '{ print $2 }')
-        cp INPUT[$i] input_$i.fq.gz
+        cp ${INPUT[$i]} input_$i.fq.gz
         ((i++))
+
+	echo -e "\e[4mINPUT samples directory\e[0m = ${INPUT[@]}"
 done
 
-echo -e "\e[4mINPUT samples directory\e[0m = ${INPUT[@]}"
 
 echo ""
 echo "Workspace succesfully created"
@@ -161,7 +163,6 @@ echo ""
 
 cd $WD/$EXP/genome
 bowtie2-build $GEND index
-
 
 echo ""
 echo "========================="
@@ -211,21 +212,25 @@ macs2 callpeak -t ../samples/chip/sample_*.bam -c ../samples/input/sample_*.bam 
 fi
 
 
-## R script is moved from installation directory to results
+## R script is moved from installation directory to results
 
-cp $INSDIR/target_genes.R .
+cp $INSDIR/target_genes*.R .
 
 ## R script is running!
 
+echo "Esto funciona"
 if [[ $MODE == -TF ]]; then
 
-Rscript target_genes_tf.R $WD/$EXP/results/ $EXP
+	"Dijo ella"
+
+	Rscript target_genes_tf.R $WD/$EXP/results/ $EXP
 
 fi
 
+echo "Bueno ya no"
 if [[ $MODE == -HI ]]; then
 
-Rscript target_genes_hi.R $WD/$EXP/results/ $EXP
+	Rscript target_genes_hi.R $WD/$EXP/results/ $EXP
 
 fi
 
