@@ -35,6 +35,29 @@ fi
 ## In any other case, the script will print the experiment name and number of
 ## samples specified in the parameters file.
 
+if [ $# -eq 1 ]; then
+MODE=-TF
+fi
+
+if [[ $MODE != -TF && $MODE != -HI ]]; then
+echo ""
+echo -e "Invalid protein type. Write -TF or -HI as the second parameter you introduce."
+echo ""
+exit
+fi
+
+if [[ $MODE == -TF ]]; then
+echo ""
+echo -e "\e[4mProtein type\e[0m = Transcription factor (-TF)"
+echo ""
+fi
+
+if [[ $MODE == -HI ]]; then
+echo ""
+echo -e "\e[4mProtein type\e[0m = Histone/epigenetic mark (-HI)"
+echo ""
+fi
+
 
 echo ""
 echo "============================"
@@ -59,36 +82,41 @@ echo -e "\e[4mAnnotation directory\e[0m: $ANND"
 INSDIR=$(grep installation_directory: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mInstallation directory\e[0m: $INSDIR"
 
-CHIP=$(grep path_chip: $PARAMS | awk '{ print $2 }')
-echo -e "\e[4mChip sample directory\e[0m = ${CHIP}"
+CHIPNUM=$(grep chip_sample_number: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mNumber of CHIP samples\e[0m: $CHIPNUM"
 
-INPUT=$(grep path_input: $PARAMS | awk '{ print $2 }')
-echo -e "\e[4mInput sample directory\e[0m = ${INPUT}"
+INPNUM=$(grep input_sample_number: $PARAMS | awk '{ print $2 }')
+echo -e "\e[4mNumber of INPUT samples\e[0m: $INPNUM"
+
+TOTNUM=$(( $CHIPSUM + $INPUTSUM ))
+echo -e "$TOTNUM samples have been given as an input."
 
 MODE=$2
 
-if [ $# -eq 1 ]; then
-MODE=-TF
-fi
 
-if [[ $MODE != -TF && $MODE != -HI ]]; then
-echo ""
-echo -e "Invalid protein type. Write -TF or -HI as the second parameter you introduce."
-echo ""
-exit
-fi
+i=1
+CHIP=()
+while [ $i -le $CHIPNUM ]
+do
+        CHIP[$i]=$(grep chip_sample_$i: $PARAMS | awk '{ print $2 }')
+        ((i++))
+done
 
-if [[ $MODE == -TF ]]; then
-echo ""
-echo -e "\e[4mProtein type\e[0m = Transcription factor (-TF)"
-echo ""
-fi
+echo -e "\e[4mCHIP samples directory\e[0m = ${CHIP[@]}"
 
-if [[ $MODE == -HI ]]; then
-echo ""
-echo -e "\e[4mProtein type\e[0m = Histone/epigenetic mark (-HI)"
-echo ""
-fi
+
+i=1
+INPUT=()
+while [ $i -le $INPNUM ]
+do
+        INPUT[$i]=$(grep input_sample_$i: $PARAMS | awk '{ print $2 }')
+        ((i++))
+done
+
+echo -e "\e[4mINPUT samples directory\e[0m = ${INPUT[@]}"
+
+
+
 
 ## Once these parameters have been read, workspace is set:
 
@@ -116,28 +144,29 @@ cd ../samples
 mkdir chip input
 
 cd chip
-cp ${CHIP} chip.fq.gz
+
+i=1
+while [ $i -le $CHIPNUM ]
+do
+	cp CHIP[$i] chip_$i.fq.gz
+	((i++))
+done
 
 cd ../input
-cp ${INPUT} input.fq.gz
+
+i=1
+while [ $i -le $INPNUM ]
+do
+	cp INPUT[$i] input_$i.fq.gz 
+    ((i++))
+done
 
 echo "Workspace succesfully created"
 
-echo ""
-echo "============================="
-echo "|   Reads quality control   |"
-echo "============================="
-echo ""
-
-cd $WD/$EXP/samples/chip
-fastqc chip.fq.gz
-
-cd $WD/$EXP/samples/input
-fastqc input.fq.gz
 
 echo ""
 echo "============================"
-echo "|      Mapping reads       |"
+echo "|     Indexing genome      |"
 echo "============================"
 echo ""
 echo "Indexing the genome. This may take a while..."
@@ -146,25 +175,33 @@ echo ""
 cd $WD/$EXP/genome
 bowtie2-build $GEND index
 
+
 echo ""
-echo "Mapping reads to the reference genome."
+echo "========================="
+echo "|   Sample processing   |"
+echo "========================="
 echo ""
 
-cd ../samples/chip
-bowtie2 -x ../../genome/index -U $CHIP -S chip.sam
 
-samtools sort -o chip.bam chip.sam
-samtools index chip.bam
+cd $WD/$EXP/samples/chip
 
-rm -r *.sam
+i=1
+while [ $i -le $CHIPNUM ]
+do
+	qsub -N chip_$i -o chip_output_$i $INSDIR/sample_processing.sh $WD/$EXP/samples/chip/chip_$i.fq.gz $i $CHIPNUM $TOTNUM $INSDIR 
+    ((i++))
+done
 
-cd ../input
-bowtie2 -x ../../genome/index -U $INPUT -S input.sam
 
-samtools sort -o input.bam input.sam
-samtools index input.bam
+cd $WD/$EXP/samples/input
 
-rm -r *.sam
+i=1
+while [ $i -le $INPNUM ]
+do
+	qsub -N input_$i -o input_output_$i $INSDIR/sample_processing.sh $WD/$EXP/samples/input/input_$i.fq.gz $i $INPNUM $TOTNUM $INSDIR 
+    ((i++))
+done
+
 
 echo ""
 echo "============================"
@@ -176,13 +213,13 @@ cd $WD/$EXP/results
 
 if [[ $MODE == -TF ]]; then
 
-macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP
+macs2 callpeak -t ../samples/chip/sample_*.bam -c ../samples/input/sample_*.bam -f BAM --outdir . -n $EXP
 
 fi
 
 if [[ $MODE == -HI ]]; then
 
-macs2 callpeak -t ../samples/chip/chip.bam -c ../samples/input/input.bam -f BAM --outdir . -n $EXP --broad
+macs2 callpeak -t ../samples/chip/sample_*.bam -c ../samples/input/sample_*.bam -f BAM --outdir . -n $EXP --broad
 
 fi
 
