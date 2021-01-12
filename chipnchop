@@ -28,7 +28,7 @@ then
         echo "-HI		This option must be specified if the analyzed proteins"
         echo "		are	histones or other specific epigenetics marks that"
         echo " 		affect large portions of DNA, in contrast to transcription factors."
-        
+
         exit
 fi
 
@@ -88,7 +88,7 @@ echo -e "\e[4mNumber of CHIP samples\e[0m: $CHIPNUM"
 INPNUM=$(grep input_sample_number: $PARAMS | awk '{ print $2 }')
 echo -e "\e[4mNumber of INPUT samples\e[0m: $INPNUM"
 
-TOTNUM=$(( $CHIPSUM + $INPUTSUM ))
+TOTNUM=$(( $CHIPNUM + $INPNUM ))
 echo -e "$TOTNUM samples have been given as an input."
 
 MODE=$2
@@ -116,9 +116,7 @@ done
 echo -e "\e[4mINPUT samples directory\e[0m = ${INPUT[@]}"
 
 
-
-
-## Once these parameters have been read, workspace is set:
+## Once these parameters have been read, workspace is set:
 
 echo ""
 echo "============================"
