@@ -34,12 +34,18 @@ BiocManager::install("ChIPpeakAnno")
 BiocManager::install("clusterProfiler")
 BiocManager::install("TxDb.Athaliana.BioMart.plantsmart28")
 BiocManager::install("org.At.tair.db")
+BiocManager::install("DOSE")
+BiocManager::install("enrichplot")
+BiocManager::install("clusterProfiler")
 
 library(ChIPseeker)
 library(ChIPpeakAnno)
 library(clusterProfiler)
 library(TxDb.Athaliana.BioMart.plantsmart28)
 library(org.At.tair.db)
+library(DOSE)
+library(enrichplot)
+library(clusterProfiler)
 
 txdb <- TxDb.Athaliana.BioMart.plantsmart28
 annotation_atha<-org.At.tair.db
@@ -93,7 +99,7 @@ print("", quote = F)
 
 ## Write a txt that stores the target genes (i.e. the regulome)
 
-write(x = target.genes,file = paste0(c(args[2],"_target_genes.txt"),collapse = ""))
+write(x = regulome,file = paste0(c(args[2],"_target_genes.txt"),collapse = ""))
 
 ## Get all genes from arabidopsis database
 
@@ -101,8 +107,6 @@ genes_arabidopsis <- as.data.frame(genes(txdb))
 genes_arabidopsis_names <- rownames(genes_arabidopsis)
 
 ## GO terms enrichment
-
-library(clusterProfiler)
 
 print("", quote = F)
 print("GO Enrichment analysis is taking place. Given a vector of genes like the one that was previously generated, enrichGO (from clusterProfiler package) will return the enrichment GO categories after False Discovery Rate (FDR) control.", quote = F)
@@ -119,15 +123,6 @@ dotplot(ego, showCategory=20)
 
 ## Cluster-profiling of GO terms
 
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-
-BiocManager::install("DOSE")
-
-library(DOSE)
-library(enrichplot)
-
-
 ## Creating a network is possible with cnetplot, but it requires a specific format that can be achieved
 ## with setReadable (available at DOSE package)
 
@@ -138,8 +133,3 @@ cnetplot(x = edox, colorEdge = TRUE)
 print("==========================", quote = F)
 print("| R script has finished! |", quote = F)
 print("==========================", quote = F)
-
-## Análisis de las palabras reconocidas por el factor
-## de transcripción mediante HOMER
-## (http://homer.ucsd.edu/homer/ngs/peakMotifs.html)
-
