@@ -24,27 +24,30 @@ print("", quote = F)
 
 ## Dependencies installation
 
-print("Installation of required packages is taking place:", quote=F)
+print("Next libraries are being loaded:"), quote=F)
 
-if (!requireNamespace("BiocManager", quietly = T))
-  install.packages("BiocManager")
-
-BiocManager::install("ChIPseeker")
-BiocManager::install("ChIPpeakAnno")
-BiocManager::install("clusterProfiler")
-BiocManager::install("TxDb.Athaliana.BioMart.plantsmart28")
-BiocManager::install("org.At.tair.db")
-BiocManager::install("DOSE")
-BiocManager::install("enrichplot")
-BiocManager::install("clusterProfiler")
-
+print("ChiPseeker")
 library(ChIPseeker)
+
+print("ChiPpeakAnno")
 library(ChIPpeakAnno)
+
+print("clusterProfiler")
 library(clusterProfiler)
+
+print("A. thaliana TxDb transcript metadata")
 library(TxDb.Athaliana.BioMart.plantsmart28)
+
+print("A. thaliana annotation")
 library(org.At.tair.db)
+
+print("DOSE")
 library(DOSE)
+
+print("enrichplot")
 library(enrichplot)
+
+print("clusterProfiler")
 library(clusterProfiler)
 
 txdb <- TxDb.Athaliana.BioMart.plantsmart28
@@ -53,7 +56,7 @@ annotation_atha<-org.At.tair.db
 ## Reading peak files
 
 print("", quote = F)
-print("Reading peak files from MaCS2 analyisis", quote = F)
+print("Reading peak files from MaCS2 analysis", quote = F)
 print("")
 
 peaks <- readPeakFile(peakfile = paste0(c(args[2],"_summits.bed"), collapse = ""),header=FALSE)

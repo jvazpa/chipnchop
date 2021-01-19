@@ -26,18 +26,6 @@ print("", quote = F)
 
 print("Installation of required packages is taking place:", quote=F)
 
-if (!requireNamespace("BiocManager", quietly = T))
-  install.packages("BiocManager")
-
-BiocManager::install("ChIPseeker")
-BiocManager::install("ChIPpeakAnno")
-BiocManager::install("clusterProfiler")
-BiocManager::install("TxDb.Athaliana.BioMart.plantsmart28")
-BiocManager::install("org.At.tair.db")
-BiocManager::install("DOSE")
-BiocManager::install("enrichplot")
-BiocManager::install("clusterProfiler")
-
 library(ChIPseeker)
 library(ChIPpeakAnno)
 library(clusterProfiler)
