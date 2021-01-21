@@ -47,7 +47,8 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 16.04. If 
 
 ### Roadmap
 
-* Make multiple sampling parallelization available.  
+* Make multiple sampling parallelization available. 
+* Make the the pipeline executable for working with pair-end samples.
 
 
 
