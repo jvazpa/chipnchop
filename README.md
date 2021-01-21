@@ -33,9 +33,17 @@ For running this pipeline, you have to check that the following softwares are in
 
 First of all, you must open the terminal and enter the folder where you want to download this repository. In order to get it, you must write in the terminal "git clone https://github.com/jvazpa/chipnchop.git". You can find this link in the CODE section of this repository. Then, you must specify your github account and password and the download will begin.
 
-### Troubleshooting
+### 🎯 Troubleshooting
 
-
+'
+grep: ../../parameters/test_params.txt: No such file or directory
+cp: missing destination file operand after 'chip_1.fq.gz'
+Try 'cp --help' for more information.
+CHIP samples directory = 
+grep: ../../parameters/test_params.txt: No such file or directory
+cp: missing destination file operand after 'input_1.fq.gz'
+Try 'cp --help' for more information.
+'
 
 ##### ChIPnCHOP doesn't read properly the parameters file
 
