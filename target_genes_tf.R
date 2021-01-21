@@ -5,6 +5,7 @@
 ##########################################
 ##
 ## Developed by: Gonzalez-Toro, A., Tamargo-Azpilicueta, J., Vazquez-Pacheco, J.
+##                                   (joatamazp@alum.us.es)
 ## January, 2021
 ##
 
@@ -24,13 +25,10 @@ print("", quote = F)
 
 ## Dependencies installation
 
-print("Next libraries are being loaded:"), quote=F)
+print("Next libraries are being loaded:", quote=F)
 
 print("ChiPseeker")
 library(ChIPseeker)
-
-print("ChiPpeakAnno")
-library(ChIPpeakAnno)
 
 print("clusterProfiler")
 library(clusterProfiler)
@@ -79,7 +77,9 @@ peakAnno <- annotatePeak(peak = peaks, tssRegion=c(-1000, 1000), TxDb=txdb)
 
 plotAnnoPie(peakAnno,ndigit=0.001)
 
-## Alternatively, by bar plot
+## Alternatively, you may be interested in representing
+## the annotation by bar plot:
+##
 ## plotAnnoBar(x = peakAnno)
 
 print("", quote = F)

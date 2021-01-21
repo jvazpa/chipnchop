@@ -16,7 +16,7 @@ echo ""
 
 if [ $# -lt 1 -o $# -gt 2 ]
 then
-        echo "Usage: bash chipnchop.sh <FULL/PATH/to/params> [options]"
+        echo "Usage: bash chipnchop <FULL/PATH/to/params> [options]"
         echo ""
         echo "params		Input file including the parameters. Check documentation"
         echo "		in order to create an acceptable parameters file. IT MUST"
@@ -188,7 +188,6 @@ do
 	samtools sort -o chip_$i.bam chip_$i.sam
 	rm chip_$i.sam
 	samtools index chip_$i.bam
-	# bamCoverage -bs 10 --normalizeUsing CPM --bam chip_$i.bam -o chip_$i.bw
 
 	## Transcript assembly
 	stringtie -G ../../annotation/annotation.gtf -o chip_$i.gtf -l chip_$i chip_$i.bam
@@ -218,7 +217,6 @@ do
         samtools sort -o input_$i.bam input_$i.sam
         rm input_$i.sam
         samtools index input_$i.bam
-        # bamCoverage -bs 10 --normalizeUsing CPM --bam input_$i.bam -o input_$i.bw --ve>
 
         ## Transcript assembly
 	stringtie -G ../../annotation/annotation.gtf -o input_$i.gtf -l input_$i input_$i.bam

@@ -16,7 +16,7 @@ echo ""
 
 if [ $# -lt 1 -o $# -gt 2 ]
 then
-        echo "Usage: bash chipnchop.sh <FULL/PATH/to/params> [options]"
+        echo "Usage: bash chipnchop <FULL/PATH/to/params> [options]"
         echo ""
         echo "params		Input file including the parameters. Check documentation"
         echo "		in order to create an acceptable parameters file. IT MUST"

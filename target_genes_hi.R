@@ -24,10 +24,9 @@ print("", quote = F)
 
 ## Dependencies installation
 
-print("Installation of required packages is taking place:", quote=F)
+print("Loading of required packages:", quote=F)
 
 library(ChIPseeker)
-library(ChIPpeakAnno)
 library(clusterProfiler)
 library(TxDb.Athaliana.BioMart.plantsmart28)
 library(org.At.tair.db)
