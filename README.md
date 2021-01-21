@@ -35,7 +35,7 @@ First of all, you must open the terminal and enter the folder where you want to 
 
 ### 🎯 Troubleshooting
 
-'
+#### *
 grep: ../../parameters/test_params.txt: No such file or directory
 cp: missing destination file operand after 'chip_1.fq.gz'
 Try 'cp --help' for more information.
@@ -45,7 +45,7 @@ cp: missing destination file operand after 'input_1.fq.gz'
 Try 'cp --help' for more information.
 '
 
-##### ChIPnCHOP doesn't read properly the parameters file
+##### * ChIPnCHOP doesn't read properly the parameters file
 
 Once you have checked you have specified the correct path to the parameter file, you must ascertain that there are one space between the colon and the parameter. For instance, "working_directory:/home/mickeymouse/tmp/" won't be read properly, whereas "working_directory: /home/anagontor1/tmp/" will.
 
@@ -56,8 +56,5 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 16.04. If 
 ### 🗺 Roadmap
 
 * Make multiple sampling parallelization available. 
-* Make the the pipeline executable for working with pair-end samples.
-
-
-
+* Make the  pipeline executable for working with pair-end samples.
 
