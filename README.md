@@ -6,7 +6,7 @@ A Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription 
 
 ### ✍️ Authors
 
-Ana González Toro, Joaquín Tamargo Azpilicueta (joatamazp@alum.us.es), José Vázquez Pacheco (josvazpac@gmail.com)
+Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamazp@alum.us.es), José Vázquez Pacheco (josvazpac@gmail.com)
 
 ### About & Usage
 
