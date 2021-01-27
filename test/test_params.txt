@@ -1,9 +1,0 @@
-working_directory: /home/josvazpac/tmp/
-experiment_name: prr5
-genome_directory: /home/josvazpac/prr5/genome/chromosome1.fa
-annotation_directory: /home/josvazpac/prr5/annotation/chromosome1.gtf
-chip_sample_number: 1
-inpt_sample_number: 1
-chip_sample_1: /home/josvazpac/prr5/samples/chip/chip_prr5_chr1.fq.gz
-input_sample_1: /home/josvazpac/prr5/samples/input/input_prr5_chr1.fq.gz
-installation_directory: /home/josvazpac/chipnchop/
