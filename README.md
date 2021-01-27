@@ -8,11 +8,11 @@ A Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription 
 
 Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamazp@alum.us.es), José Vázquez Pacheco (josvazpac@gmail.com)
 
-### About & Usage
+### 🧩 About & Usage
 
 When you have downloaded the repository, you must specify the path of the parameters that are needed in the test_params.txt file, located in the test folder. Then, in the chipnchop folder you must write in the terminal "bash chipnchop <FULL/PATH/to/params/test_params.txt> [options]". As for <FULL/PATH/to/params/test_params.txt>, you must CLARIFY THE COMPLETE DIRECTORY TO PARAMETERS FILE. With regards to [options], you must write -TF if the analyzed proteins are transcription factors or interact with the chromatine in a similar way, or -HI if the proteins analyzed are histones or other specific epigenetic marks that affect large portions of DNA, in contrast to transcription factors.
 
-### Requiered Dependencies and Specifications
+### 🔗 Requiered Dependencies and Specifications
 
 For running this pipeline, you have to check that the following softwares are installed in your system:
 [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
@@ -29,27 +29,40 @@ For running this pipeline, you have to check that the following softwares are in
 [enrichplot](https://bioconductor.org/packages/release/bioc/html/enrichplot.html)
 [Homer](http://homer.ucsd.edu/homer/download.html)
 
-### Installation
+### 💻 Installation
 
 First of all, you must open the terminal and enter the folder where you want to download this repository. In order to get it, you must write in the terminal "git clone https://github.com/jvazpa/chipnchop.git". You can find this link in the CODE section of this repository. Then, you must specify your github account and password and the download will begin.
 
-### Troubleshooting
+### 🎯 Troubleshooting
 
+#### *
+grep: ../../parameters/test_params.txt: No such file or directory
+cp: missing destination file operand after 'chip_1.fq.gz'
+Try 'cp --help' for more information.
+CHIP samples directory = 
+grep: ../../parameters/test_params.txt: No such file or directory
+cp: missing destination file operand after 'input_1.fq.gz'
+Try 'cp --help' for more information.
+'
 
-
-##### ChIPnCHOP doesn't read properly the parameters file
+##### * ChIPnCHOP doesn't read properly the parameters file
 
 Once you have checked you have specified the correct path to the parameter file, you must ascertain that there are one space between the colon and the parameter. For instance, "working_directory:/home/mickeymouse/tmp/" won't be read properly, whereas "working_directory: /home/anagontor1/tmp/" will.
 
-### Status
+### 📍 Status
 
 ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 16.04. If you find a bug, please do report it on the GitHub issue tracker. 
 
-### Roadmap
+### 🗺 Roadmap
 
+<<<<<<< HEAD
 * Make multiple sampling parallelization available by using Sun Grid Engine (SGE),  Simple Linux Utility for Resource Management (Slurm) or similar. Yet there were a first version in which we included SGE parallelization, it has been tested with obsolete versions of the software. Thus, it has to be re-tested so that it can be used that way.
 * Make the the pipeline executable for working with pair-end samples.
 
 
 
+=======
+* Make multiple sampling parallelization available. 
+* Make the  pipeline executable for working with pair-end samples.
+>>>>>>> 60cff969991a67cf727607ac4ccea39472ec4c72
 
