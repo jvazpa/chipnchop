@@ -2,13 +2,13 @@
 
 ![header_chipnchop](https://github.com/jvazpa/chipnchop/blob/main/format/header.png)
 
-A Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription factors and other proteins that interact with DNA developed by Biochemistry Degree students at the University of Seville.
-
 ### ✍️ Authors
 
 Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamazp@alum.us.es), José Vázquez Pacheco (josvazpac@gmail.com)
 
 ### 🧩 About & Usage
+
+ChIPnCHOP is a Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription factors and other proteins that interact with DNA in Arabidopsis thaliana col-0 developed by Biochemistry Degree students at the University of Seville.
 
 Once you have downloaded the repository, using it is easy as pie. First, you must specify the path of the parameters that are needed in the test_params.txt file, located in the test folder. Then, in the chipnchop folder you must call chipnchop by typing: 'bash chipnchop <FULL/PATH/to/params/test_params.txt> [options]'. Remember, in <FULL/PATH/to/params/test_params.txt>, you must CLARIFY THE COMPLETE DIRECTORY TO PARAMETERS FILE. 
 
