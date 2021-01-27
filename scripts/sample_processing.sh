@@ -1,3 +1,6 @@
+#! /bin/bash
+
+## Sample processing
 ## Developed by: González-Toro A., Tamargo-Azpilicueta J., Vazquez-Pacheco J.
 
 #$ -S /bin/bash
@@ -49,7 +52,7 @@ then
 	echo "All sample processing (both CHIP and INPUT) have succesfully finished. Transcriptome merging is running."
 	echo ""
 	
-	$INSDIR/chipnchop/transcriptome_merging.sh ${SAMPLE}/../../results  $INSDIR
+	$INSDIR/chipnchop/scripts/transcriptome_merging.sh ${SAMPLE}/../../results
 	
 	## (error-prone): qsub -o merge -N merge $INSDIR/chipnchop/transcriptome_merging.sh ${SAMPLE}/../../results $INSDIR 
 fi

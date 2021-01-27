@@ -1,3 +1,7 @@
+#! /bin/bash
+
+## Transcriptome merging
+## Developed by: González-Toro A., Tamargo-Azpilicueta J., Vazquez-Pacheco J.
 
 #$ -S /bin/bash
 #$ -V
@@ -7,7 +11,6 @@
 ## Reading parameters
 
 RESDIR=$1
-INSDIR=$2
 
 echo ""
 echo "============================"
