@@ -272,13 +272,13 @@ cd $WD/$EXP/results
 
 if [[ $MODE == -TF ]]; then
 
-macs2 callpeak -t ../samples/chip/sample_*.bam -c ../samples/input/sample_*.bam -f BAM --outdir . -n $EXP
+macs2 callpeak -t ../samples/chip/chip_*.bam -c ../samples/input/input_*.bam -f BAM --outdir . -n $EXP
 
 fi
 
 if [[ $MODE == -HI ]]; then
 
-macs2 callpeak -t ../samples/chip/sample_*.bam -c ../samples/input/sample_*.bam -f BAM --outdir . -n $EXP --broad
+macs2 callpeak -t ../samples/chip/chip_*.bam -c ../samples/input/input_*.bam -f BAM --outdir . -n $EXP --broad
 
 fi
 
@@ -312,6 +312,6 @@ echo ""
 
 mkdir output_homer
 
-findMotifsGenome.pl ${EXP}_summits.bed tair10 output_homer -len 8 -size 200
+findMotifsGenome.pl ${EXP}_summits.bed tair10 motif_finding_results -len 8 -size 200
 
 echo "Analysis is done!"
