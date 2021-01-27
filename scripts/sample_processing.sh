@@ -52,12 +52,7 @@ then
 	echo "All sample processing (both CHIP and INPUT) have succesfully finished. Transcriptome merging is running."
 	echo ""
 	
-	$INSDIR/chipnchop/scripts/transcriptome_merging.sh ${SAMPLE}/../../results
+	bash $INSDIR/scripts/transcriptome_merging.sh ${SAMPLE}/../../results
 	
 	## (error-prone): qsub -o merge -N merge $INSDIR/chipnchop/transcriptome_merging.sh ${SAMPLE}/../../results $INSDIR 
 fi
-
-
-
-
-

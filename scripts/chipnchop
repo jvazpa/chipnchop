@@ -166,6 +166,7 @@ echo ""
 cd $WD/$EXP/genome
 bowtie2-build $GEND index
 
+
 echo ""
 echo "========================="
 echo "|   Sample processing   |"
@@ -178,7 +179,7 @@ cd $WD/$EXP/samples/chip
 i=1
 while [ $i -le $CHIPNUM ]
 do
-	${INSDIR}/scripts/sample_processing.sh chip_$i.fq.gz $i $TOTNUM $INSDIR
+	bash ${INSDIR}/scripts/sample_processing.sh chip_$i.fq.gz $i $TOTNUM $INSDIR
 	((i++))
 done
 
@@ -188,7 +189,7 @@ cd $WD/$EXP/samples/input
 i=1
 while [ $i -le $INPNUM ]
 do
-	${INSDIR}/scripts/sample_processing.sh input_$i.fq.gz $i $TOTNUM $INSDIR
+	bash ${INSDIR}/scripts/sample_processing.sh input_$i.fq.gz $i $TOTNUM $INSDIR
 	((i++))
 done
 
