@@ -2,6 +2,9 @@
 
 ![header_chipnchop](https://github.com/jvazpa/chipnchop/blob/main/format/header.png)
 
+[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
+
+
 ### ✍️ Authors
 
 Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamazp@alum.us.es), José Vázquez Pacheco (josvazpac@gmail.com)
@@ -61,7 +64,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 
 ### License
 
-
+This software is licensed 
 
 
 
