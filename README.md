@@ -62,7 +62,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 * Make the the pipeline executable for working with pair-end samples.
 * Make it possible to work with other ecotype or species different from Arabidopsis thaliana col-0.
 
-### License
+### 🗺 Roadmap
 
 This software is licensed under GNU General Public License v3.0. More info: https://choosealicense.com/licenses/gpl-3.0/
 
