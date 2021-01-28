@@ -44,11 +44,11 @@ First of all, you must open the terminal and get into the folder where you want 
 
 ### 🎯 Troubleshooting
 
-#### * grep: ../../parameters/parameter_file.txt: No such file or directory
+#### grep: ../../parameters/parameter_file.txt: No such file or directory
 
 This error message comes up when the parameter file is not correctly specified or, most likely, if the path is not FULLY specified. In other words, you must type the whole path, and not going back and forth with double dots (..). 
 
-##### * ChIPnCHOP doesn't read properly the parameters file
+##### ChIPnCHOP doesn't read properly the parameters file
 
 Once you have checked you have specified the correct path to the parameter file, you must ascertain that there are one space between the colon and the parameter. For instance, "working_directory:/home/mickeymouse/tmp/" won't be read properly, whereas "working_directory: /home/anagontor1/tmp/" will.
 
@@ -64,7 +64,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 
 ### License
 
-This software is licensed 
+This software is licensed under GNU General Public License v3.0. More info: https://choosealicense.com/licenses/gpl-3.0/
 
 
 
