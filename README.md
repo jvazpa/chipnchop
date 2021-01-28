@@ -44,7 +44,7 @@ First of all, you must open the terminal and get into the folder where you want 
 
 ### 🎯 Troubleshooting
 
-#### grep: ../../parameters/parameter_file.txt: No such file or directory
+##### grep: ../../parameters/parameter_file.txt: No such file or directory
 
 This error message comes up when the parameter file is not correctly specified or, most likely, if the path is not FULLY specified. In other words, you must type the whole path, and not going back and forth with double dots (..). 
 
