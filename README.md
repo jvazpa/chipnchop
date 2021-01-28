@@ -4,7 +4,7 @@
 
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 
-[![Discord server: Join us!](https://img.shields.io/static/v1?label=chat&message=3 online&color=green&?logo=discord)](https://discord.gg/CZQhuCYK)
+[![Discord server: Join us!](https://img.shields.io/static/v1?label=<chat>&message=<3 online>&color=<green>&?logo=discord)](https://discord.gg/CZQhuCYK)
 
 ### ✍️ Authors
 
