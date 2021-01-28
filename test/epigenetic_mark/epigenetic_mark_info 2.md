@@ -16,7 +16,7 @@ We suggest using GNU screen as you are not yet allowed to parallelize the proces
 
 After downloading (and opening a screen), go to chipnchop directory and type:
 
-`	`bash chipnchop  full/installation/path/to/test/epigenetic\_mark/test\_params.txt -HI
+`bash chipnchop  full/installation/path/to/test/epigenetic\_mark/test\_params.txt -HI	`
 
 Check if directories and parameters are correctly read.
 
