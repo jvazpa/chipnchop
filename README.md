@@ -16,6 +16,7 @@ ChIPnCHOP is a Chromatin Immuno-Precipitation analyisis pipeline for histones, t
 Once you have downloaded the repository, using it is easy as pie 🍰. 
 
 1. Download your A. thaliana col-0 genome (FASTA) and genome annotation (GFF3). [Ensembl Plants](https://plants.ensembl.org/index.html) hosts both the [genome assembly](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/fasta/arabidopsis_thaliana/dna/) and [genome annotation](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/gff3/arabidopsis_thaliana). They can be downloaded with `wget` command.
+
 1.1 If not yet stored at your computer, you can download the ChIP-seq datasets you are interested from GEO. Just fetch the SRA that corresponds to the samples you are willing to work on, and download via fastq-dump (see [SRA Toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software)). **ChIP-seq datasets must be compressed** (you can do so by typing `gzip <sequence.fq>`).
 2. Once you have downloaded it all, you must specify the path of the parameters that are required at **parameters.txt** file. 
 3. Then, in the chipnchop folder you must call chipnchop by typing: `bash chipnchop <FULL/PATH/to/params/test_params.txt> [options]`. Remember, in `<FULL/PATH/to/params/test_params.txt>`, you must CLARIFY THE COMPLETE DIRECTORY TO PARAMETERS FILE. 
