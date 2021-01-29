@@ -24,6 +24,7 @@ bowtie2 -x ../../genome/index -U $SAMPLE -S sample_$i.sam
 
 samtools sort -o sample_$i.bam sample_$i.sam
 rm sample_$i.sam
+rm $SAMPLE
 samtools index sample_$i.bam
 
 
