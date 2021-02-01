@@ -24,6 +24,8 @@ fastqc $SAMPLE
 ## MAPPING READS
 bowtie2 -x ../../genome/index -U $SAMPLE -S sample_$i.sam
 
+rm -r $SAMPLE
+
 samtools sort -o sample_$i.bam sample_$i.sam
 rm sample_$i.sam
 samtools index sample_$i.bam
