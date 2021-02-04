@@ -13,7 +13,7 @@ Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamaz
 
 ChIPnCHOP is a Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription factors and other proteins that interact with DNA in *Arabidopsis thaliana* col-0 developed by Biochemistry Degree students at the University of Seville.
 
-Once you have downloaded the repository, using it is easy as pie 🍰. 
+Basically, this pipeline receives a list of the fastq samples you are willing to analyze, together with the control samples, and process them to give a list of the genes which these proteins are hipothetically interacting with. Appart from the cistrome, we are keen on protein-nucleic acids interactomics. Thus, this pipeline will provide an output list with motif enrichment found in the ChIP sequences. It surely does sound fancy, but once you have downloaded the repository, using it is easy as pie 🍰:
 
 1. Download your A. thaliana col-0 genome (FASTA) and genome annotation (GFF3). If not sure which to use, [Ensembl Plants](https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index) hosts both the [genome assembly](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/fasta/arabidopsis_thaliana/dna/) and [genome annotation](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/gff3/arabidopsis_thaliana). They can be downloaded with `wget` command.
 * If not yet stored at your computer, you can download the ChIP-seq datasets you are interested in from GEO. Just fetch the SRA that corresponds to the samples you are willing to work on, and download via fastq-dump (see [SRA Toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software)). **ChIP-seq datasets must be compressed** (you can do so by typing `gzip <sequence.fq>`).
@@ -66,6 +66,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 * Make multiple sampling parallelization available by using Sun Grid Engine (SGE),  Simple Linux Utility for Resource Management (Slurm) or similar. Yet there were a first version in which we included SGE parallelization, it has been tested with obsolete versions of the software. Thus, it has to be re-tested so that it can be used that way.
 * Make the the pipeline executable for working with pair-end samples.
 * Make it possible to work with other ecotype or species different from Arabidopsis thaliana col-0.
+* Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. We are working on that.
 
 ### License
 
