@@ -55,7 +55,7 @@ annotation_atha<-org.At.tair.db
 
 print("", quote = F)
 print("Reading peak files from MaCS2 analysis", quote = F)
-print("")
+print("", quote = F)
 
 peaks <- readPeakFile(peakfile = paste0(c(args[2],"_summits.bed"), collapse = ""),header=FALSE)
 

@@ -22,30 +22,48 @@ print("", quote = F)
 print(paste(c("Current working directory is:", getwd())), quote=F)
 print("", quote = F)
 
+
 ## Dependencies installation
 
-print("Loading of required packages:", quote=F)
+print("Next libraries are being loaded:", quote=F)
 
+print("ChiPseeker")
 library(ChIPseeker)
+
+print("clusterProfiler")
 library(clusterProfiler)
+
+print("A. thaliana TxDb transcript metadata")
 library(TxDb.Athaliana.BioMart.plantsmart28)
+
+print("A. thaliana annotation")
 library(org.At.tair.db)
+
+print("DOSE")
 library(DOSE)
+
+print("enrichplot")
 library(enrichplot)
+
+print("clusterProfiler")
 library(clusterProfiler)
 
 txdb <- TxDb.Athaliana.BioMart.plantsmart28
 annotation_atha<-org.At.tair.db
 
-## Reading peak files
+## Reading broad peak files
 
 print("", quote = F)
-print("Reading peak files from MaCS2 analyisis", quote = F)
-print("")
+print("Reading broad peak files from MaCS2 analysis", quote = F)
+print("", quote = F)
 
 peaks <- readPeakFile(peakfile = paste0(c(args[2],"_peaks.broadPeak"), collapse = ""),header=FALSE)
 
-covplot(paste0(c(args[2],"_peaks.broadPeak"), collapse = ""), title = paste0(c("ChIP Peaks of ",args[2], "histone/epigenetic mark over Chromosomes"), collapse = ""))
+covplot(peaks, weightCol = "V5", title = paste0(c("ChIP Peaks of ",args[2], "histone/epigenetic mark over Chromosomes"), collapse = ""))
+
+## Defining the region that is considered a promoter nearby the transcription start site (TSS)
+
+promoter <- getPromoters(TxDb=txdb, upstream=1000, downstream=1000)
 
 ## Peak annotation 
 
@@ -53,7 +71,7 @@ print("", quote = F)
 print("ChIPseeker is now annotating peaks", quote = F)
 print("", quote = F)
 
-peakAnno <- annotatePeak(peak = peaks, tssRegion=c(-1000, 1000), TxDb=txdb, annoDb=annotation_atha)
+peakAnno <- annotatePeak(peak = peaks, tssRegion=c(-1000, 1000), TxDb=txdb)
 
 ## Representation of annotated peaks in pie chart
 
@@ -70,10 +88,12 @@ plotDistToTSS(peakAnno, title="Distribution of genomic loci relative to TSS", yl
 
 ## Create a dataframe from annotation data
 
+annotation_df <- as.data.frame(peakAnno)
+
 annotation.to.exclude <- c("Distal Intergenic", "Downstream (1-2kb)", 
                            "Downstream (<1kb)", "Downstream (2-3kb)")
 
-targets <- subset(peakAnno, !(annotation %in% annotation.to.exclude))
+targets <- subset(annotation_df, !(annotation %in% annotation.to.exclude))
 regulome <- targets$geneId
 
 print("", quote = F)
@@ -116,4 +136,3 @@ cnetplot(x = edox, colorEdge = TRUE)
 print("==========================", quote = F)
 print("| R script has finished! |", quote = F)
 print("==========================", quote = F)
-
