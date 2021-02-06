@@ -3,7 +3,7 @@
 ![header_chipnchop](https://github.com/jvazpa/chipnchop/blob/main/format/header.png)
 
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
-[![Discord server: Join us!](https://img.shields.io/discord/804064843900518420?logo=discord)](https://discord.gg/CZQhuCYK)
+[![Discord server: Join us!](https://img.shields.io/discord/804064843900518420?logo=discord)](https://discord.gg/wNQJkg5nND)
 
 ### ✍️ Authors
 
@@ -13,7 +13,12 @@ Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamaz
 
 ChIPnCHOP is a Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription factors and other proteins that interact with DNA in *Arabidopsis thaliana* col-0 developed by Biochemistry Degree students at the University of Seville.
 
-Once you have downloaded the repository, using it is easy as pie 🍰. First, you must specify the path of the parameters that are needed in the test_params.txt file, located in the test folder. Then, in the chipnchop folder you must call chipnchop by typing: `bash chipnchop <FULL/PATH/to/params/test_params.txt> [options]`. Remember, in `<FULL/PATH/to/params/test_params.txt>`, you must CLARIFY THE COMPLETE DIRECTORY TO PARAMETERS FILE. 
+Basically, this pipeline receives a list of the fastq samples you are willing to analyze, together with the control samples, and process them to give a list of the genes which these proteins are hipothetically interacting with. Appart from the cistrome, we are keen on protein-nucleic acids interactomics. Thus, this pipeline will provide an output list with motif enrichment found in the ChIP sequences. It surely does sound fancy, but once you have downloaded the repository, using it is easy as pie 🍰:
+
+1. Download your A. thaliana col-0 genome (FASTA) and genome annotation (GFF3). If not sure which to use, [Ensembl Plants](https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index) hosts both the [genome assembly](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/fasta/arabidopsis_thaliana/dna/) and [genome annotation](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/gff3/arabidopsis_thaliana). They can be downloaded with `wget` command.
+* If not yet stored at your computer, you can download the ChIP-seq datasets you are interested in from GEO. Just fetch the SRA that corresponds to the samples you are willing to work on, and download via fastq-dump (see [SRA Toolkit](https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software)). **ChIP-seq datasets must be compressed** (you can do so by typing `gzip <sequence.fq>`).
+2. Once you have downloaded it all, you must specify the path of the parameters that are required at **parameters_file.txt** file. 
+3. Then, in the chipnchop folder you must call chipnchop by typing: `bash chipnchop <FULL/PATH/to/params/parameter_file.txt> [options]`. Remember, in `<FULL/PATH/to/params/parameter_file.txt>`, you must CLARIFY THE COMPLETE DIRECTORY TO PARAMETERS FILE. 
 
 With regard to other [options], you must write `-TF` if the analyzed proteins are transcription factors or interact with the chromatine in a similar way, or `-HI` if the proteins analyzed are histones or other specific epigenetic marks that affect large portions of DNA, in contrast to transcription factors. By default, chipnchop will assume you are working with a transcription factor (-TF) unless you state otherwise by using option -HI. Basically, changing this option includes slight changes in some of the functions that are used so that they are optimized for the case study.
 
@@ -44,7 +49,7 @@ First of all, you must open the terminal and get into the folder where you want 
 
 ### 🎯 Troubleshooting
 
-#### grep: ../../parameters/parameter_file.txt: No such file or directory
+##### grep: ../../parameters/parameter_file.txt: No such file or directory
 
 This error message comes up when the parameter file is not correctly specified or, most likely, if the path is not FULLY specified. In other words, you must type the whole path, and not going back and forth with double dots (..). 
 
@@ -61,8 +66,9 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 * Make multiple sampling parallelization available by using Sun Grid Engine (SGE),  Simple Linux Utility for Resource Management (Slurm) or similar. Yet there were a first version in which we included SGE parallelization, it has been tested with obsolete versions of the software. Thus, it has to be re-tested so that it can be used that way.
 * Make the the pipeline executable for working with pair-end samples.
 * Make it possible to work with other ecotype or species different from Arabidopsis thaliana col-0.
+* Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. We are working on that.
 
-### License
+### License
 
 This software is licensed under GNU General Public License v3.0. More info: https://choosealicense.com/licenses/gpl-3.0/
 
