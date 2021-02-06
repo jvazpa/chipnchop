@@ -4,7 +4,7 @@ echo ""
 echo "-. .-.   .-. .-.   .-. .-.   ."
 echo "||\|||\ /|||\|||\ /|||\|||\ /|"
 echo "|/ \|||\|||/ \|||\|||/ \|||\||"
-echo "~   ·-~ ·-·   ·-~ ·-·   -~  ·~"
+echo "~   Â·-~ Â·-Â·   ~-~ Â·-Â·   -~  Â·~"
 
 
 
@@ -179,7 +179,7 @@ cd $WD/$EXP/samples/chip
 i=1
 while [ $i -le $CHIPNUM ]
 do
-	bash ${INSDIR}/scripts/sample_processing.sh chip_$i.fq.gz $i $TOTNUM $INSDIR
+	bash ${INSDIR}/scripts/sample_processing.sh chip_$i.fq.gz $i $TOTNUM $INSDIR $WD/$EXP/results $WD/$EXP/samples/chip/
 	((i++))
 done
 
@@ -189,7 +189,7 @@ cd $WD/$EXP/samples/input
 i=1
 while [ $i -le $INPNUM ]
 do
-	bash ${INSDIR}/scripts/sample_processing.sh input_$i.fq.gz $i $TOTNUM $INSDIR
+	bash ${INSDIR}/scripts/sample_processing.sh input_$i.fq.gz $i $TOTNUM $INSDIR $WD/$EXP/results $WD/$EXP/samples/input/
 	((i++))
 done
 
@@ -240,6 +240,16 @@ echo "|      Finding motifs       |"
 echo "============================="
 echo ""
 
+if [[ $MODE == -TF ]]; then
+
 findMotifsGenome.pl ${EXP}_summits.bed tair10 motif_finding_results -len 8 -size 200
+
+fi
+
+if [[ $MODE == -HI ]]; then
+
+findMotifsGenome.pl ${EXP}_peaks.broadPeak tair10 motif_finding_results -len 8 -size 200
+
+fi
 
 echo "Analysis is done!"
