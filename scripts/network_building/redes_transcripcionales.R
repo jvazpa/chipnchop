@@ -5,9 +5,10 @@
 #                                                              #
 #                                                              #
 #  Author: Joaquín Tamargo Azpilicueta (joatamazp@alum.us.es)  #
+#          José Vázquez Pacheco                                #
+#          Ana González Toro                                   #
 #                                                              #
-#              Bioinformatics and Genomic Analysis             #
-#         Biochemistry Degree - University of Seville          #
+#                   University of Seville                      #
 #                                                              #
 ################################################################
 
@@ -19,7 +20,6 @@ library(igraph)
 ## factor. The names of all of these transcription factors is written at
 ## targets.txt file included in tf_targets directory. Workspace is thus
 ## chosen to be tf_targets file.
-
 
 ## 1. Reading transcription factor targets
 
@@ -33,8 +33,7 @@ genes_in_network <- c()
 
 for(i in 1:length(tf_names))
 {
-  current_file_name.txt <- paste0(tf_names[i],".txt")
-  genes_in_network<-c(genes_in_network,read.table(file = current_file_name.txt, header = F, as.is = TRUE)[[1]])
+  genes_in_network<-c(genes_in_network,read.table(file = paste0(tf_names[i], ".txt"), header = F, as.is = TRUE)[[1]])
 }
 
 genes_in_network<-unique(genes_in_network)
@@ -43,26 +42,20 @@ length(genes_in_network)
 
 ## 2. Generation of adjacency matrix
 
-## In order to create a transcription network, adjacency matrices are used. For
-## that purpose, a blank matrix is created with as much rows and columns as genes
-## affected by analyzed transcription factors (see "genes_in_network" vector).
-
 ## 2.1. Creating an empty square matrix with as much rows and columns as unique genes
 ## are present in the cistrome
 
 adjacency_matrix <- matrix(0,nrow = length(genes_in_network), ncol = length(genes_in_network))
 colnames(adjacency_matrix) <- genes_in_network
 rownames(adjacency_matrix) <- genes_in_network
-adjacency_matrix[1:5,1:5]
 
 ## 2.2. Filling in the matrices with cistrome information
 
 for(i in 1:length(tf_names))
 {
   current_tf_target<-read.table(file = paste0(tf_names[i],".txt"), header = F, as.is = TRUE)[[1]]
-  adjacency_matrix[tf_names[i],current_tf_target] <- adjacency_matrix[gene_name,gene_name]+1
+  adjacency_matrix[tf_names[i],current_tf_target] <- adjacency_matrix[tf_names[i],current_tf_target]+1
 }
-
 
 ## 3. Creation of graphs from adjacency matrices
 
@@ -88,22 +81,14 @@ hist(x = degree(tf_subgraph, mode="total"), xlab = "Node degree", ylab = "")
 
 ## 4.2.1. Kolmogorov-Smirnoff test
 
-## It doesn't seem like a scale-free distribution. Rather, it looks like a normal
-## distribution of node degrees. Otherwise, we could statistically analyze if the
+## We can statistically analyze if the
 ## distribution suits a negative potential (Kolmogorov-Smirnoff test):
 
 ## H0 (Null hypothesis): It follows a negative potential distribution
 ## H1 (Alternative hypothesis): It doesn't follow a negative potential distribution
 
-tfs_degree_distribution <- degree.distribution(graph = tf_subgraph)
-power.law.fit(x = tfs_degree_distribution)
-
-## p-value is high (0.8198614>>>0,05), so it can't be discarded that this follows
-## a negative potential distribution. Graphically, it shows that it doesn't. 
-## In essence, the test is not working properly as there is a really low number
-## of nodes. 
-
-## This is due to the nature of the test: it doesn't follow regular
+## Nevertheless, analyzing this sort of datasets with so little nodes may 
+## have important errors due to the nature of the test: it doesn't follow regular
 ## null/alternative hypothesis structure where null hypothesis is the one
 ## tested to be wrong. Eventually, this leads to loss of control on the errors
 ## derived from this approach.
@@ -122,10 +107,12 @@ lm.res <- lm(log(node.degree.freq) ~ log(as.numeric(names(node.degree.freq))))
 
 summary(lm.res)
 
-## r^2 is really low (-0.08461) and p-value very high (0.8052). What this means
-## is that, in this hypothesis contrast, the null hypothesis consist of not sticking
-## to a linear regression. As p-value exceeds 0,05 (an is really high, indeed), 
-## null hypothesis is possible.
+## When r^2 is really low and p-value is high, it means that
+## the null hypothesis (consisting of not sticking
+## to a negative potential linear regression), is not discarded.
+## 
+## To sum up, low r^2 and high p-values may indicate that the network
+## doesn't follow a negative potential.
 
 ## 4.2.3. Statistical analysis comparing with other randomly generated networks 
 
