@@ -67,6 +67,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 * Make the the pipeline executable for working with pair-end samples.
 * Make it possible to work with other ecotype or species different from Arabidopsis thaliana col-0.
 * Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. We are working on that.
+* We are trying to figure out how to easily integrate RNA-seq datasets performed under same conditions as CHIP-seq ones with the latter.
 
 ### License
 
