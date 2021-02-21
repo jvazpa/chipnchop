@@ -49,6 +49,10 @@ First of all, you must open the terminal and get into the folder where you want 
 
 ### 🎯 Troubleshooting
 
+##### While indexing, a message: "Warning: Encountered reference sequence with only gaps" comes up
+
+An error like this may appear if your genome is compressed. Uncompress your "genome.fq.gz" files using gunzip, modify parameter file accordingly and retry.
+
 ##### grep: ../../parameters/parameter_file.txt: No such file or directory
 
 This error message comes up when the parameter file is not correctly specified or, most likely, if the path is not FULLY specified. In other words, you must type the whole path, and not going back and forth with double dots (..). 
