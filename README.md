@@ -49,6 +49,10 @@ First of all, you must open the terminal and get into the folder where you want 
 
 ### 🎯 Troubleshooting
 
+##### While indexing, a message: "Warning: Encountered reference sequence with only gaps" comes up
+
+An error like this may appear if your genome is compressed. Uncompress your "genome.fq.gz" files using gunzip, modify parameter file accordingly and retry.
+
 ##### grep: ../../parameters/parameter_file.txt: No such file or directory
 
 This error message comes up when the parameter file is not correctly specified or, most likely, if the path is not FULLY specified. In other words, you must type the whole path, and not going back and forth with double dots (..). 
@@ -66,7 +70,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 * Make multiple sampling parallelization available by using Sun Grid Engine (SGE),  Simple Linux Utility for Resource Management (Slurm) or similar. Yet there were a first version in which we included SGE parallelization, it has been tested with obsolete versions of the software. Thus, it has to be re-tested so that it can be used that way.
 * Make the the pipeline executable for working with pair-end samples.
 * Make it possible to work with other ecotype or species different from Arabidopsis thaliana col-0.
-* Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. We are working on that.
+* Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. Our scratchs regarding this objective are located at network_building folder at scripts directory. We are trying to figure out how to easily integrate RNA-seq datasets performed under same conditions as CHIP-seq with the latter. An option might be available in which providing a RNA-seq differentially expressed genes (DEG) would lead to a restriction in the node number (that will be presumably big if working with few transcription factors) to those DEG. 
 
 ### License
 
