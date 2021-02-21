@@ -61,11 +61,25 @@ for(i in 1:length(tf_names))
 
 transcriptional_network <- graph_from_adjacency_matrix(adjmatrix = adjacency_matrix, mode = "directed")
 
-tf_subgraph <- induced_subgraph(graph = transcriptional_network, vids = tf_names)
+write_graph(graph = transcriptional_network, file = "tf_transcriptional_network.gml",format = "gml")
+
+
+### READING DIFFERENTIALLY EXPRESSED GENES
+
+aba_related<-read.table(file = "aag1550_Table_S4.txt", header = F)[[1]]
+
+tf_subgraph <- induced_subgraph(graph = transcriptional_network, vids = aba_related)
+
+aba_related[degree(graph = tf_subgraph,mode = "out")>0]
+
+degree(tf_subgraph, mode = "out")
+
+aba_related[]
+
 
 ## Writing gml graphs for visualization
 
-write_graph(graph = tf_subgraph, file = "tf_subgraph.gml",format = "gml")
+write_graph(graph = tf_subgraph, file = "subgraph_network.gml",format = "gml")
 
 
 ## 4. Network characterization
@@ -87,7 +101,14 @@ hist(x = degree(tf_subgraph, mode="total"), xlab = "Node degree", ylab = "")
 ## H0 (Null hypothesis): It follows a negative potential distribution
 ## H1 (Alternative hypothesis): It doesn't follow a negative potential distribution
 
-## Nevertheless, analyzing this sort of datasets with so little nodes may 
+tfs_degree_distribution <- degree.distribution(graph = tf_subgraph)
+power.law.fit(x = tfs_degree_distribution)
+
+## Example:
+## p-value=1>>>0,05 => it can't be discarded that it follows a negative potential
+##                     distribution
+
+## Nevertheless, analyzing this sort of datasets with little nodes may 
 ## have important errors due to the nature of the test: it doesn't follow regular
 ## null/alternative hypothesis structure where null hypothesis is the one
 ## tested to be wrong. Eventually, this leads to loss of control on the errors
@@ -97,13 +118,13 @@ hist(x = degree(tf_subgraph, mode="total"), xlab = "Node degree", ylab = "")
 
 ## Studying the linear regression of the negative potential (base e):
 
-node_degree_total<-degree(tf_subgraph,mode="total")
+node_degree_total<-degree(transcriptional_network,mode="total")
 
 node_degree_freq<-table(node_degree_total)
 
 plot(log(as.numeric(names(node_degree_freq))), log(node_degree_freq),pch=19,cex=1)
 
-lm.res <- lm(log(node.degree.freq) ~ log(as.numeric(names(node.degree.freq))))
+lm.res <- lm(log(node_degree_freq) ~ log(as.numeric(names(node_degree_freq))))
 
 summary(lm.res)
 
@@ -113,6 +134,11 @@ summary(lm.res)
 ## 
 ## To sum up, low r^2 and high p-values may indicate that the network
 ## doesn't follow a negative potential.
+
+## Example:
+## r^2=0,9885 => Fair adjustment
+## p-value=2,967e-07 => The null hypothesis (not sticking to a negative potential
+##                      linear regression) is discarded.
 
 ## 4.2.3. Statistical analysis comparing with other randomly generated networks 
 
@@ -130,18 +156,18 @@ for (j in 1:number.randomisations)
 {
   ## For each iteration, create a new blank adjacency network
   
-  random_adjacency_network <- matrix(0, nrow = length(node.degree.out), ncol = length(node.degree.out))
+  random_adjacency_network <- matrix(0, nrow = length(upreg_genes), ncol = length(upreg_genes))
   print(j)
   
   i=1
   pvalue=0
-  for (i in 1:length(node.degree.out))
+  for (i in 1:length(upreg_genes))
   {
     ## For each transcription factor, randomly choose any of the transcription factors and
     ## add 1 to that position in the matrix. This assignation would mean "TF A regulates
     ## TF B expression".
     
-    random_adjacency_network[i,sample(x = 1:21,size = node.degree.out[i],replace = FALSE)] <- 1
+    random_adjacency_network[i,sample(x = 1:length(upreg_genes),size = node.degree.out[i],replace = FALSE)] <- 1
   }
   
   ## When autorregulation exist, diagonal "1"s will appear in the adjacency matrix.
@@ -150,11 +176,13 @@ for (j in 1:number.randomisations)
   random.autoreg[j] <- sum(diag(random_adjacency_network))
 }
 
-hist(random.autoreg)
+hist(random_adjacency_network)
+
+node.degree.out[2]
 
 ## 4.2.3.3. Comparison with the original adjacency matrix
 
-## Adjacency matrix is extracted from the subgraph obtained in appendix 3 and diagonal sum is done.
+## Adjacency matrix is extracted from the subgraph obtained and diagonal sum is done.
 
 tf_adjacency_matrix <- as.matrix(as_adjacency_matrix(graph = tf_subgraph))
 
@@ -179,8 +207,6 @@ sum(random.autoreg > sum(diag(tf_adjacency_matrix)))/number.randomisations
 ## igraph has an implemented function that allows the generation of all possible isocratic
 ## networks given a fixed number of nodes.
 
-help("graph.isocreate")
-
 ## For 3 nodes, there are 16 possible isocratic networks:
 
 plot.igraph(graph.isocreate(size = 3, directed = T, number = 0))
@@ -203,8 +229,6 @@ plot.igraph(graph.isocreate(size = 3, directed = T, number = 15))
 ## To determine which of these networks constitute a network motif, a function 
 ## implemented in igraph allows to recognize and count how many times each of 
 ## these subgraphs appear in a given network.
-
-help("graph.motifs")
 
 graph.motifs(graph = tf_subgraph,size = 3)
 

@@ -86,6 +86,20 @@ print("", quote = F)
 
 plotDistToTSS(peakAnno, title="Distribution of genomic loci relative to TSS", ylab = "Genomic Loci (%) (5' -> 3')")
 
+
+### Average Profile of ChIP peaks binding to TSS region
+
+tagMatrix <- list(getTagMatrix(peak = peaks, windows=promoter))
+
+plotAvgProf(tagMatrix[[1]], xlim=c(-1000, 1000), resample=100, conf = 0.95)
+
+## Heatmap of ChIP binding to TSS regions
+
+## tagHeatmap is quite bugged. Once available, they might be enabled.
+
+## tagHeatmap(tagMatrix, xlim=c(-1000, 1000), color="red", title="Genomic occupancy of transcription factor")
+
+
 ## Create a dataframe from annotation data
 
 annotation_df <- as.data.frame(peakAnno)

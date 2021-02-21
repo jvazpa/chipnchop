@@ -88,11 +88,29 @@ print("", quote = F)
 
 plotDistToTSS(peakAnno, title="Distribution of genomic loci relative to TSS", ylab = "Genomic Loci (%) (5' -> 3')")
 
+
+### Average Profile of ChIP peaks binding to TSS region
+
+tagMatrix <- list(getTagMatrix(peak = peaks, windows=promoter))
+
+plotAvgProf(tagMatrix[[1]], xlim=c(-1000, 1000), resample=100, conf = 0.95)
+
+## Heatmap of ChIP binding to TSS regions
+
+## tagHeatmap is quite bugged. Once available, they might be enabled.
+
+## tagHeatmap(tagMatrix, xlim=c(-1000, 1000), color="red", title="Genomic occupancy of transcription factor")
+
+
 ## Create a dataframe from annotation data
 
 annotation_df <- as.data.frame(peakAnno)
 
+write(x = annotation_df,file = paste0(c(args[2],"peak_annotation.txt"),collapse = ""))
+
 promoter_annotation <- subset(annotation_df,annotation=="Promoter")
+
+head(promoter_annotation)
 
 regulome<- promoter_annotation$geneId
 
@@ -117,7 +135,9 @@ print("", quote = F)
 
 ego <- enrichGO(gene = regulome, universe = genes_arabidopsis_names, OrgDb = annotation_atha, ont = "ALL", pAdjustMethod = "BH", pvalueCutoff  = 0.01, qvalueCutoff  = 0.05, readable = TRUE, keyType = "TAIR")
 
-head(ego)
+head(as.data.frame(ego))
+
+write(x = as.data.frame(ego),file = paste0(c("regulome_enriched_GO.txt"),collapse = ""))
 
 ## GO terms enrichment visualization
 
