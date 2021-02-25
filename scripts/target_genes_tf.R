@@ -106,7 +106,7 @@ plotAvgProf(tagMatrix[[1]], xlim=c(-1000, 1000), resample=100, conf = 0.95)
 
 annotation_df <- as.data.frame(peakAnno)
 
-write(x = annotation_df,file = paste0(c(args[2],"peak_annotation.txt"),collapse = ""))
+write.table(x = annotation_df,file = paste0(c(args[2],"_peak_annotation.txt"),collapse = ""))
 
 promoter_annotation <- subset(annotation_df,annotation=="Promoter")
 
@@ -137,7 +137,7 @@ ego <- enrichGO(gene = regulome, universe = genes_arabidopsis_names, OrgDb = ann
 
 head(as.data.frame(ego))
 
-write(x = as.data.frame(ego),file = paste0(c("regulome_enriched_GO.txt"),collapse = ""))
+write.table(x = as.data.frame(ego),file = paste0(c("regulome_enriched_GO.txt"),collapse = ""))
 
 ## GO terms enrichment visualization
 

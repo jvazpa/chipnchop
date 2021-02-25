@@ -116,7 +116,7 @@ print("", quote = F)
 
 ## Write a txt that stores the target genes (i.e. the regulome)
 
-write(x = regulome,file = paste0(c(args[2],"_target_genes.txt"),collapse = ""))
+write.table(x = regulome,file = paste0(c(args[2],"_target_genes.txt"),collapse = ""))
 
 ## Get all genes from arabidopsis database
 
