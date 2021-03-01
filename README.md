@@ -70,7 +70,7 @@ ChIPnCHOP has been tested on MacOS Catalina, MacOS Big Sur and Ubuntu 20.04.
 * Make multiple sampling parallelization available by using Sun Grid Engine (SGE),  Simple Linux Utility for Resource Management (Slurm) or similar. Yet there were a first version in which we included SGE parallelization, it has been tested with obsolete versions of the software. Thus, it has to be re-tested so that it can be used that way.
 * Make the the pipeline executable for working with pair-end samples.
 * Make it possible to work with other ecotype or species different from Arabidopsis thaliana col-0.
-* Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. Our scratchs regarding this objective are located at network_building folder at scripts directory. We are trying to figure out how to easily integrate RNA-seq datasets performed under same conditions as CHIP-seq with the latter. An option might be available in which providing a RNA-seq differentially expressed genes (DEG) would lead to a restriction in the node number (that will be presumably big if working with few transcription factors) to those DEG. 
+* Network analysis might be carried on through a pipeline that makes use of chipnchop main pipeline. Our scratchs regarding this objective are located at network_building folder at scripts directory. We are trying to figure out how to easily integrate RNA-seq datasets performed under same conditions as CHIP-seq with the latter. 
 
 ### License
 
