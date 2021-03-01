@@ -17,7 +17,7 @@ We suggest using GNU screen as you are not yet allowed to parallelize the proces
 
 After downloading (and opening a screen), go to chipnchop directory and type:
 
-`bash chipnchop  full/installation/path/to/test/transcription_factor/test_params.txt -HI	`
+`bash chipnchop  full/installation/path/to/test/transcription_factor/test_params.txt -TF	`
 
 Check if directories and parameters are correctly read.
 
