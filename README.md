@@ -13,6 +13,10 @@ Ana González Toro (anagtoro7@gmail.com), Joaquín Tamargo Azpilicueta (joatamaz
 
 ChIPnCHOP is a Chromatin Immuno-Precipitation analyisis pipeline for histones, transcription factors and other proteins that interact with DNA in *Arabidopsis thaliana* col-0 developed by Biochemistry Degree students at the University of Seville.
 
+See how it works at:
+
+[![ChIPnCHOP tutorial](http://img.youtube.com/vi/sN3IiNRQDD0/0.jpg)](http://www.youtube.com/watch?v=sN3IiNRQDD0 "ChIPnCHOP tutorial")
+
 Basically, this pipeline receives a list of the fastq samples you are willing to analyze, together with the control samples, and process them to give a list of the genes which these proteins are hipothetically interacting with. Appart from the cistrome, we are keen on protein-nucleic acids interactomics. Thus, this pipeline will provide an output list with motif enrichment found in the ChIP sequences. It surely does sound fancy, but once you have downloaded the repository, using it is easy as pie 🍰:
 
 1. Download your A. thaliana col-0 genome (FASTA) and genome annotation (GFF3). If not sure which to use, [Ensembl Plants](https://plants.ensembl.org/Arabidopsis_thaliana/Info/Index) hosts both the [genome assembly](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/fasta/arabidopsis_thaliana/dna/) and [genome annotation](ftp://ftp.ensemblgenomes.org/pub/plants/release-49/gff3/arabidopsis_thaliana). They can be downloaded with `wget` command.
