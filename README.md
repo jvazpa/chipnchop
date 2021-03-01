@@ -45,7 +45,7 @@ At R, you must have downloaded these following packages previously:
 
 ### 💻 Installation
 
-First of all, you must open the terminal and get into the folder where you want to download this repository. In order to get it, you must write in the terminal "git clone https://github.com/username/chipnchop.git". You can find this link in the CODE green button above. Then, you must specify your github account and password and the download will begin. That's all!
+First of all, you must open the terminal and get into the folder where you want to download this repository. In order to get it, you must write in the terminal "git clone https://github.com/jvazpa/chipnchop.git". You can find this link in the CODE green button above. Then, you must specify your github account and password and the download will begin. That's all!
 
 ### 🎯 Troubleshooting
 
