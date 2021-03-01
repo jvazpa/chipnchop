@@ -31,10 +31,6 @@ rm sample_$i.sam
 samtools index sample_$i.bam
 
 
-## TRANSCRIPT ASSEMBLY
-stringtie -G ../../annotation/annotation.gtf -o sample_$i.gtf -l sample_$i sample_$i.bam
-
-
 ## Preparing merge list file for transcriptome merging
 echo ${SAMDIR}/sample_$i.gtf >> ../../results/merge_list.txt
 
