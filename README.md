@@ -28,6 +28,8 @@ With regard to other [options], you must write `-TF` if the analyzed proteins ar
 
 There are two examples available that you can check before you perform your own analysis. Those can be found at "test" file, within this repository. Depending on your interests, you could either try the analysis on transcription factors or epigenetic marks. 
 
+[![ChIPnCHOP tutorial](http://img.youtube.com/vi/DnjXOaCVV-8/0.jpg)](https://youtu.be/DnjXOaCVV-8 "ChIPnCHOP tutorial")
+
 ### 🔗 Requiered Dependencies and Specifications
 
 For running this pipeline, you have to check that the following software are installed in your system:
