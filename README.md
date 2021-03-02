@@ -26,7 +26,7 @@ Basically, this pipeline receives a list of the fastq samples you are willing to
 
 With regard to other [options], you must write `-TF` if the analyzed proteins are transcription factors or interact with the chromatine in a similar way, or `-HI` if the proteins analyzed are histones or other specific epigenetic marks that affect large portions of DNA, in contrast to transcription factors. By default, chipnchop will assume you are working with a transcription factor (-TF) unless you state otherwise by using option -HI. Basically, changing this option includes slight changes in some of the functions that are used so that they are optimized for the case study.
 
-There are two examples available that you can check before you perform your own analysis. Those can be found at "test" file, within this repository. Depending on your interests, you could either try the analysis on transcription factors or epigenetic marks. 
+There are two examples available that you can check before you perform your own analysis. Those can be found at "test" file, within this repository. Depending on your interests, you could either try the analysis on transcription factors or epigenetic marks. Check out how to start your analysis with this video:
 
 [![ChIPnCHOP tutorial](http://img.youtube.com/vi/gpGvFhVEe2M/0.jpg)](https://www.youtube.com/watch?v=gpGvFhVEe2M "ChIPnCHOP tutorial")
 
